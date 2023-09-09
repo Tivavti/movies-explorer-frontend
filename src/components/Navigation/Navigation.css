@@ -1,0 +1,133 @@
+.nav__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 30px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__signup {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33em;
+  text-decoration: none;
+  color: #000;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.nav__signup:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.nav__signin {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33em;
+  color: #fff;
+  background-color: #3456f3;
+  border-radius: 3px;
+  text-decoration: none;
+  width: 76px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.nav__signin:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.nav__container-active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 1056px;
+  list-style-type: none;
+}
+
+@media screen and (max-width: 1270px) {
+  .nav__container-active {
+    display: none;
+  }
+}
+
+.nav__list {
+  display: flex;
+  column-gap: 16px;
+}
+
+.nav__item {
+  color: #000;
+  font-size: 13px;
+  line-height: 1.38em;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.nav__item_active {
+  font-weight: 500;
+}
+
+.menu__toggle {
+  width: 44px;
+  height: 44px;
+  background-image: url("../../images/icon-burger.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  display: none;
+  padding: 0;
+}
+
+.menu__toggle_active {
+  background-image: url("../../images/icon-closed.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  width: 22px;
+  height: 22px;
+}
+
+@media screen and (max-width: 1270px) {
+  .menu__toggle {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .nav__container {
+    column-gap: 14px;
+  }
+
+  .nav__signup {
+    font-size: 10px;
+    line-height: 1.6em;
+  }
+
+  .nav__signin {
+    font-size: 10px;
+    line-height: 1.6em;
+    width: 54px;
+    height: 26px;
+  }
+
+  .menu__toggle {
+    width: 40px;
+    height: 43px;
+    background-image: url("../../images/icon-burger.svg");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+  }
+}

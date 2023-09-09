@@ -1,0 +1,114 @@
+.search-form {
+  background-color: #fafafa;
+  margin: 0 70px;
+  padding: 70px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.search-form__container {
+  border: none;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  margin: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 751px 80px 226px;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  justify-items: flex-start;
+  align-items: center;
+  height: 72px;
+}
+
+.search-form__icon {
+  background-image: url(../../images/icon-find.svg);
+  background-repeat: no-repeat;
+  width: 34px;
+  height: 34px;
+  justify-self: center;
+  padding-left: 10px;
+}
+
+.search-form__input {
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.11em;
+  border: none;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.search-form__input:focus {
+  outline: none;
+}
+
+.search-form__input::placeholder {
+  color: #a0a0a0;
+}
+
+.search-form__button {
+  background-image: url(../../images/find.svg);
+  background-repeat: no-repeat;
+  background-color: #fff;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  border: none;
+  justify-self: flex-end;
+  padding: 0;
+}
+
+@media screen and (max-width: 1279px) {
+  .search-form {
+    margin: 0 30px;
+    padding: 75px 0 110px;
+  }
+
+  .search-form__container {
+    grid-template-columns: 60px 370px 54px 220px;
+  }
+
+  .search-form__icon {
+    padding-left: 0;
+  }
+
+  .search-form__input {
+    padding-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .search-form {
+    margin: 0 10px;
+    padding: 80px 0 45px;
+    border: none;
+  }
+
+  .search-form__container {
+    grid-template-columns: 221px 60px;
+    grid-template-rows: repeat(2, 70px);
+    row-gap: 33px;
+  }
+
+  .search-form__icon {
+    display: none;
+  }
+
+  .search-form__input {
+    padding-bottom: 5px;
+  }
+
+  .search-form__input {
+    font-size: 14px;
+    line-height: 1.42em;
+    padding-bottom: 5px;
+    padding-left: 10px;
+  }
+
+  .search-form__button {
+    justify-self: center;
+  }
+}
