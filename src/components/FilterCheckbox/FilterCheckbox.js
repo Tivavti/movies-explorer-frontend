@@ -2,14 +2,13 @@ import React from "react";
 
 function FilterCheckbox() {
   return (
-    <section className="filter-checkbox" aria-label="Переключатель.">
+    <div className="filter-checkbox">
       <label className="filter-checkbox__toggle">
         <input className="filter-checkbox__toggle-checkbox" type="checkbox" />
-        <div className="filter-checkbox__toggle-switch"></div>
+        <span className="filter-checkbox__toggle-switch"></span>
       </label>
       <span className="filter-checkbox__toggle-title">Короткометражки</span>
-
-    </section >
+    </div >
   )
 }
 

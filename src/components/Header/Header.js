@@ -7,12 +7,24 @@ function Header({ onSideMenu, isLoggedIn }) {
   const location = useLocation();
 
   return (
-    <header className={`header ${location.pathname === '/' ? 'header_active' : ''}`}>
-      <Logo />
-      <Navigation
-        onSideMenu={onSideMenu}
-        isLoggedIn={isLoggedIn}
-      />
+    <header className={`header ${location.pathname === '/' ? 'header_active' : ''} ${location.pathname === '/profile' ? 'profile__header' : ''}`}>
+      {isLoggedIn ? (
+        <div className="header__container">
+          <Logo />
+          <Navigation
+            onSideMenu={onSideMenu}
+            isLoggedIn={isLoggedIn}
+          />
+        </div>
+      ) : (
+        <div className="header__container-active">
+          <Logo />
+          <Navigation
+            onSideMenu={onSideMenu}
+            isLoggedIn={isLoggedIn}
+          />
+        </div>
+      )}
     </header>
   );
 }

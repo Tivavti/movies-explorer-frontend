@@ -17,7 +17,7 @@ function AboutMe() {
         <img
           className="about-me__foto"
           src={MyFoto}
-          alt="Моя фотография."
+          alt="Фотография улыбающегося молодого человека."
         />
       </div>
     </section>

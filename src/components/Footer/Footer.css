@@ -3,6 +3,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 79px 70px 20px;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .footer__title {

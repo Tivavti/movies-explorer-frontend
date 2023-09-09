@@ -5,6 +5,7 @@
   align-items: flex-start;
   margin: 70px auto;
   width: 396px;
+  background: #fafafa;
 }
 
 .auth__welcome {
@@ -34,7 +35,8 @@
 }
 
 .auth__input:focus {
-  outline: none;
+  outline: 2px dashed rgba(0, 0, 0, 0.08);
+  cursor: text;
 }
 
 .auth__button {
@@ -112,7 +114,7 @@
   margin-bottom: 90px;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   .auth {
     margin: 232px auto;
   }
@@ -145,7 +147,7 @@
   }
 
   .auth__footer {
-    width: 390px;
+    width: 260px;
     padding-top: 15px;
   }
 

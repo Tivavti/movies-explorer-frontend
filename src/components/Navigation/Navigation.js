@@ -6,23 +6,25 @@ function Navigation({ isLoggedIn, onSideMenu }) {
   const location = useLocation();
 
   return (
-    <nav className="nav">
-      {!isLoggedIn ? (
-        <ul className="nav__container">
-          <li>
-            <Link to="/signup" className="nav__signup">
-              Регистрация
-            </Link>
-          </li>
-          <li>
-            <Link to="/signin" className="nav__signin">
-              Войти
-            </Link>
-          </li>
-        </ul>
+    <>
+      {isLoggedIn ? (
+        <nav className="nav">
+          <ul className="nav__container">
+            <li>
+              <Link to="/signup" className="nav__signup">
+                Регистрация
+              </Link>
+            </li>
+            <li>
+              <Link to="/signin" className="nav__signin">
+                Войти
+              </Link>
+            </li>
+          </ul>
+        </nav>
       ) : (
-        <>
-          <ul className="nav__container-active">
+        <nav className="nav nav_active">
+          <ul className="nav__container nav__container_active">
             <li className="nav__list">
               <Link to="/movies" className={`nav__item ${location.pathname === "/movies" ? "nav__item_active" : ""}`}>
                 Фильмы
@@ -38,12 +40,13 @@ function Navigation({ isLoggedIn, onSideMenu }) {
           <button
             type="button"
             aria-label="Кнопка вызова бокового меню."
-            className="menu__toggle"
+            className="nav__menu-toggle"
             onClick={onSideMenu} >
           </button>
-        </>
-      )}
-    </nav>
+        </nav>
+      )
+      }
+    </>
   );
 }
 

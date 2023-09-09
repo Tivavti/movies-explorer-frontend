@@ -7,9 +7,9 @@ function Auth({ welcome, children, buttonText, formText, link, linkText }) {
   return (
     <div className="auth">
       <Logo />
-      <p className="auth__welcome">
+      <h1 className="auth__welcome">
         {welcome}
-      </p>
+      </h1>
       <form className="auth__form">
         {children}
         <button type="submit" className="auth__button">{buttonText}</button>

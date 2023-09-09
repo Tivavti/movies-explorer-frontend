@@ -5,9 +5,9 @@ import headerLogo from "../../images/logo.svg";
 function Logo() {
   return (
     <div className="logo">
-      <Link to="/" className="header__logo-link">
+      <Link to="/" className="logo__link">
         <img
-          className="header__logo"
+          className="logo__image"
           src={headerLogo}
           alt="Улыбающееся лицо."
         />

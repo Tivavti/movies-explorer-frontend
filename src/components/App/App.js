@@ -43,7 +43,9 @@ function App() {
         <Route exact path="/saved-movies" element={<SavedMovies
           onSideMenu={handleSideMenuClick}
         />} />
-        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profile" element={<Profile
+          onSideMenu={handleSideMenuClick}
+        />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <SideMenu

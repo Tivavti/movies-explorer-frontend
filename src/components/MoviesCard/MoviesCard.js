@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import cardPoster from "../../images/example-pic.jpg";
 
-function MoviesCard() {
+function MoviesCard({ card }) {
   const location = useLocation();
   const [isSaved, setSaved] = useState(false);
 
@@ -12,7 +12,7 @@ function MoviesCard() {
   };
   return (
     <section className="movies-card" aria-label="Карточка фильма.">
-      <img className="movies-card__image" src={cardPoster} alt="Постер фильма." />
+      <img className="movies-card__image" src={cardPoster} alt={`Постер фильма ${card}`} />
       <h2 className="movies-card__title">33 слова о дизайне</h2>
       <>
         {location.pathname === "/movies" && (
