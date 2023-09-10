@@ -11,9 +11,9 @@ function Profile({ onSideMenu }) {
       />
       <main className="profile__main">
         <section className="profile__section" aria-label="Профайл.">
-          <p className="profile__welcome">
+          <h1 className="profile__welcome">
             Привет, Виталий!
-          </p>
+          </h1>
           <form className="profile__form">
             <label className="profile__name profile__field">
               <span className="profile__placeholder">Имя</span>

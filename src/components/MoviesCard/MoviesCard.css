@@ -72,14 +72,15 @@
   opacity: 1;
 }
 
+.movies-card__save-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .movies-card__save-button_active {
   background-image: url(../../images/icon-save-active.svg)
 }
 
-.movies-card__save-button :hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
 
 @media screen and (max-width: 1270px) {
   .movies-card {

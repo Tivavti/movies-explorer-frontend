@@ -7,8 +7,8 @@ function SideMenu({ isSideMenuOpen, onSideMenuClose }) {
   const location = useLocation();
   useSideMenuClose(isSideMenuOpen, onSideMenuClose)
   return (
-    <section className={`menu ${isSideMenuOpen ? "menu_container-overlay" : ""}`} aria-label="Боковое меню.">
-      <div className={`menu__container ${isSideMenuOpen ? "menu_opened" : ""}`}>
+    <section className={`menu ${isSideMenuOpen ? "menu_opened" : ""}`} aria-label="Боковое меню.">
+      <div className={`menu__container ${isSideMenuOpen ? "menu__container-overlay" : ""}`}>
         <button
           className="menu__button-close"
           type="button"
