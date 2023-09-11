@@ -1,0 +1,33 @@
+.profile-button {
+  color: #000;
+  font-size: 13px;
+  line-height: 1.38em;
+  text-decoration: none;
+  font-weight: 400;
+  border-radius: 50px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 9px 12px;
+  display: flex;
+  column-gap: 7px;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.profile-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.profile-button__text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14em;
+  margin: 0;
+}
+
+.profile-button__icon {
+  width: 12px;
+  height: 14px;
+  background-image: url(../../images/icon.svg);
+  background-repeat: no-repeat;
+}
