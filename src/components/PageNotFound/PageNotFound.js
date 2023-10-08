@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 
 function PageNotFound() {
+  function back() {
+    window.history.go(-1);
+  }
+
   return (
     <main className="not-found">
       <section className="not-found__section" aria-label="Страница не найдена.">
@@ -9,7 +13,7 @@ function PageNotFound() {
         <h1 className="not-found__title">
           Страница не найдена
         </h1>
-        <Link className="not-found__link-to-main" to="/">Назад</Link>
+        <button className="not-found__link-to-main" type="button" onClick={back}>Назад</button>
       </section>
     </main>
   )

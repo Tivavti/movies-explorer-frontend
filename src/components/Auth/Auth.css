@@ -60,6 +60,14 @@
   cursor: pointer;
 }
 
+.auth__button_disabled {
+  background: #e8e8e8;
+}
+
+.auth__button_disabled:hover {
+  cursor: context-menu;
+}
+
 .auth__footer {
   width: 396px;
   padding-top: 15px;
