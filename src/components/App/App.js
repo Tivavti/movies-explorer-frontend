@@ -23,6 +23,7 @@ function App() {
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("isUserLogin"));
   const [response, setResponse] = useState("");
+  const [responseProfile, setResponseProfile] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
@@ -76,7 +77,7 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
-  function handleLogin({ email, password }, setLoading) {
+  function handleLogin({ email, password }, resetForm, setLoading) {
     authorize(email, password)
       .then((res) => {
         localStorage.setItem("isUserLogin", true)
@@ -98,15 +99,16 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
+        resetForm();
       })
   }
 
-  function handleRegister({ name, email, password }, setLoading) {
+  function handleRegister({ name, email, password }, resetForm, setLoading) {
     register(name, email, password)
       .then(() => {
         setSuccess(true);
         handleInfoTooltip();
-        return handleLogin({ email, password }, setLoading);
+        return handleLogin({ email, password }, resetForm, setLoading);
       })
       .catch((err) => {
         setSuccess(false);
@@ -119,6 +121,7 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
+        resetForm();
       })
   }
 
@@ -133,18 +136,18 @@ function App() {
         });
         setSuccess(true);
         setUpdating(false);
-        setResponse("Данные успешно обновлены")
+        setResponseProfile("Данные успешно обновлены")
       })
       .catch((err) => {
         setSuccess(false);
         setUpdating(false);
         setFormValid(false);
         if (err.includes("409")) {
-          return setResponse("Пользователь с таким email уже существует.")
+          return setResponseProfile("Пользователь с таким email уже существует.")
         } else {
-          return setResponse("При обновлении профиля произошла ошибка.")
+          return setResponseProfile("При обновлении профиля произошла ошибка.")
         }
-      });
+      })
   }
 
   function handleLogout() {
@@ -153,7 +156,7 @@ function App() {
         setSuccess(true);
         handleInfoTooltip();
         setLoggedIn(false);
-        navigate('/signin', { replace: true });
+        navigate("/", { replace: true });
         setCurrentUser({});
         localStorage.clear();
       })
@@ -185,7 +188,7 @@ function App() {
           localStorage.setItem("savedMovies", JSON.stringify([movieToSave, ...savedMovies]));
         })
         .catch(console.error)
-    } else  {
+    } else {
       const movieId = (savedMovies.find(savedMovie => savedMovie.movieId === movie.id))._id;
       deleteMovie(movieId)
         .then(() => {
@@ -202,7 +205,7 @@ function App() {
     deleteMovie(movieId)
       .then(() => {
         setSavedMovies(savedMovies.filter((m) => m._id !== movie._id))
-        localStorage.removeItem("savedMovies", savedMovies.filter((m) => m._id !== movie._id));
+        localStorage.setItem("savedMovies", JSON.stringify(savedMovies.filter((m) => m._id !== movieId)));
       })
       .catch(console.error)
       .finally(() => {
@@ -256,22 +259,23 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   handleLogout={handleLogout}
                   setCurrentUser={setCurrentUser}
-                  response={response}
-                  setResponse={setResponse}
+                  responseProfile={responseProfile}
+                  setResponseProfile={setResponseProfile}
                   isUpdating={isUpdating}
                   isFormValid={isFormValid}
                   setFormValid={setFormValid}
                   setUpdating={setUpdating}
                 />} />
-              <Route exact path="/signup" element={
-                <Register
-                  handleRegister={handleRegister}
-                  isLoggedIn={isLoggedIn}
-                />} />
-              <Route exact path="/signin" element={
-                <Login
-                  handleLogin={handleLogin}
-                />} />
+                <Route exact path="/signup" element={
+                  <Register
+                    handleRegister={handleRegister}
+                    isLoggedIn={isLoggedIn}
+                  />} />
+                <Route exact path="/signin" element={
+                  <Login
+                    handleLogin={handleLogin}
+                    isLoggedIn={isLoggedIn}
+                  />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
             <SideMenu

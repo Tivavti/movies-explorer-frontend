@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import Auth from "../Auth/Auth";
 import { useFormWithValidation } from "../../hook/useFormWithValidation";
 import { RegexEmail, RegexName } from "../../utils/constants";
 
 
-function Register({ handleRegister }) {
+function Register({ handleRegister, isLoggedIn }) {
   const [isFormValid, setFormValid] = useState(false);
-  const { values, errors, handleChange, setErrors } = useFormWithValidation();
+  const { values, errors, handleChange, setErrors, resetForm } = useFormWithValidation();
 
   useEffect(() => {
-    if (errors.name || errors.email) {
+    if (errors.name || errors.email || !values.name || !values.email || !values.password) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [errors]);
+  }, [errors, setErrors, values.email, values.name, values.password]);
 
   function handleSubmit(evt, setLoading) {
     evt.preventDefault();
 
-    handleRegister(values, setLoading);
+    handleRegister(values, resetForm, setLoading);
   }
 
   function changeName(evt) {
@@ -42,6 +43,10 @@ function Register({ handleRegister }) {
         setErrors({ ...errors, email: "Поле email не соответствует шаблону электронной почты." });
       }
     }
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to="/profile" />
   }
 
   return (

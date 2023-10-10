@@ -29,24 +29,29 @@ function Movies({ onSideMenu, isLoggedIn, setLoading, handleSave, handleDelete, 
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    setSearchQuery(localStorage.getItem("keyword"));
+    setSearchQuery(JSON.parse(localStorage.getItem("keyword")));
     if (localStorage.getItem("isToggle") === "true") {
       setFoundMovies(JSON.parse(localStorage.getItem("foundMoviesShort")));
     };
     if (localStorage.getItem("isToggle") === "false") {
       setFoundMovies(JSON.parse(localStorage.getItem("foundMovies")));
     };
-  }, [])
+  }, [isToggleOn])
 
   useEffect(() => {
-    getSavedMovies()
-      .then((movies) => {
-        localStorage.setItem("savedMovies", JSON.stringify(movies));
-        setSavedMovies(movies);
-      })
-      .catch(() => {
-        setError("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
-      })
+    const moviesSaved = JSON.parse(localStorage.getItem("savedMovies"));
+    if (!moviesSaved) {
+      getSavedMovies()
+        .then((movies) => {
+          localStorage.setItem("savedMovies", JSON.stringify(movies));
+          setSavedMovies(movies);
+        })
+        .catch(() => {
+          setError("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
+        })
+    } else {
+      setSavedMovies(moviesSaved);
+    }
   }, [setSavedMovies])
 
   useEffect(() => {
@@ -82,7 +87,7 @@ function Movies({ onSideMenu, isLoggedIn, setLoading, handleSave, handleDelete, 
   async function handleSearch(searchQuery) {
     if (searchQuery && localStorage.getItem("initialMovies")) {
       setSearchQuery(searchQuery);
-      localStorage.setItem("keyword", searchQuery);
+      localStorage.setItem("keyword", JSON.stringify(searchQuery));
       const beatFilms = JSON.parse(localStorage.getItem("initialMovies"));
       const filteredMovies = beatFilms.filter((movie) =>
         movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
@@ -102,6 +107,7 @@ function Movies({ onSideMenu, isLoggedIn, setLoading, handleSave, handleDelete, 
       const data = await getMovies();
       localStorage.setItem("initialMovies", JSON.stringify(data));
       setFoundMovies(data);
+      localStorage.setItem("keyword", JSON.stringify(searchQuery));
       const beatFilms = JSON.parse(localStorage.getItem("initialMovies"));
       const filteredMovies = beatFilms.filter((movie) =>
         movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
@@ -127,6 +133,11 @@ function Movies({ onSideMenu, isLoggedIn, setLoading, handleSave, handleDelete, 
 
   function handleToggleClick() {
     setToggleOn(!isToggleOn);
+    const filteredMovies = JSON.parse(localStorage.getItem("foundMovies"));
+
+    if (filteredMovies) {
+      checkToggle(filteredMovies);
+    }
   }
 
   function checkToggle(filteredMovies) {

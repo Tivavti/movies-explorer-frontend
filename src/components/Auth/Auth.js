@@ -19,7 +19,7 @@ function Auth({ welcome, children, buttonText, formText, link, linkText, isValid
       <form className="auth__form" onSubmit={onSubmit} noValidate>
         {children}
         {isLoading ?
-          <button type="button" className="auth__button">Проверяем...</button>
+          <button type="button" className="auth__button" disabled={true}>Проверяем...</button>
           :
           <input className={isValid ? "auth__button" : "auth__button auth__button_disabled"} type="submit" value={buttonText} disabled={isValid ? false : true} />
         }

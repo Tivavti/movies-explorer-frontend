@@ -4,29 +4,22 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import { getSavedMovies } from "../../utils/MainApi";
 import { SHORT_MOVIE } from "../../utils/constants";
 
-function SavedMovies({ onSideMenu, isLoggedIn, handleDelete, isLoading, setLoading }) {
+function SavedMovies({ onSideMenu, isLoggedIn, handleDelete, isLoading }) {
   const [savedMovies, setSavedMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState("");
   const [isToggleOn, setToggleOn] = useState(false);
 
   useEffect(() => {
-    getSavedMovies()
-      .then((movies) => {
-        localStorage.setItem("savedMovies", JSON.stringify(movies));
-        setSavedMovies(movies);
-      })
-      .catch(console.error)
+    setSavedMovies(JSON.parse(localStorage.getItem("savedMovies")));
   }, [setSavedMovies])
 
 
   function handleSearch(searchQuery) {
     if (searchQuery) {
       setSearchQuery(searchQuery);
-      localStorage.setItem("keyword", searchQuery);
       const filteredMovies = savedMovies.filter((movie) =>
         movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
       );

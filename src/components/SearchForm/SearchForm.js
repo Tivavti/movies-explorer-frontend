@@ -9,7 +9,6 @@ function SearchForm({searchQuery, setSearchQuery, handleSearch, isToggleOn, hand
     evt.preventDefault();
 
     handleSearch(searchQuery);
-    console.log("click")
   }
 
   return (

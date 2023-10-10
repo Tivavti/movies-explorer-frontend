@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.movies-explorer.irako.nomoredomainsicu.ru';
+export const BASE_URL = 'api.movies-explorer.irako.nomoredomainsicu.ru';
 
 const getResponseData = (res) => {
   if (!res.ok) {

@@ -6,7 +6,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useFormWithValidation } from "../../hook/useFormWithValidation";
 import { RegexEmail, RegexName } from "../../utils/constants";
 
-function Profile({ onSideMenu, isLoggedIn, response, setResponse, handleUpdateUser, handleLogout, isUpdating, isFormValid, setFormValid, setUpdating }) {
+function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, handleUpdateUser, handleLogout, isUpdating, isFormValid, setFormValid, setUpdating }) {
   const { values, setValues, handleChange, errors, setErrors, isValid } = useFormWithValidation();
   const [isLoading, setLoading] = useState(false);
 
@@ -15,12 +15,12 @@ function Profile({ onSideMenu, isLoggedIn, response, setResponse, handleUpdateUs
 
 
   useEffect(() => {
-    if (errors.name || errors.email || response) {
+    if (errors.name || errors.email || responseProfile) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [errors, response, setFormValid]);
+  }, [errors, responseProfile, setFormValid]);
 
   useEffect(() => {
     setValues({
@@ -49,12 +49,12 @@ function Profile({ onSideMenu, isLoggedIn, response, setResponse, handleUpdateUs
 
   function onClick() {
     setUpdating(!isUpdating);
+    setResponseProfile("");
   }
 
   function onSubmit(evt) {
     evt.preventDefault();
 
-    setResponse("");
     setLoading(true);
     handleUpdateUser(values, setLoading);
   };
@@ -101,12 +101,13 @@ function Profile({ onSideMenu, isLoggedIn, response, setResponse, handleUpdateUs
 
             {isUpdating ?
               <div className="profile__button-container">
-                <span className="profile__error-message">{errors.name || errors.email || response}</span>
-                <button type="submit" className={!isValid || !initialUser || !isFormValid ? "profile__button-save_disabled" : "profile__button-save"} disabled={isFormValid ? false : true} onClick={onSubmit}>{isLoading ? "Сохраняем..." : "Сохранить"}</button>
+                <span className="profile__error-message">{errors.name || errors.email || responseProfile}</span>
+                <button type="submit" className={!isValid || !initialUser || !isFormValid ? "profile__button-save_disabled" : "profile__button-save"} disabled={!isLoading && isFormValid ? false : true} onClick={onSubmit}>{isLoading ? "Сохраняем..." : "Сохранить"}{isLoading? true : false}</button>
               </div>
               :
               <>
                 <div className="profile__button-container">
+                  <span className="profile__error-message">{responseProfile}</span>
                   <button type="submit" className="profile__button" onClick={onClick}>Редактировать</button>
                 </div>
 

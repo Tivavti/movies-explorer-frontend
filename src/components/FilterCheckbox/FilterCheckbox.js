@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterCheckbox({ isToggleOn, handleToggleClick }) {
+function FilterCheckbox({ isToggleOn, checkToggle, handleToggleClick }) {
   return (
     <div className="filter-checkbox">
       <label className="filter-checkbox__toggle">
