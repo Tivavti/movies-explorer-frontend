@@ -31,6 +31,7 @@ function App() {
   const [isUpdating, setUpdating] = useState(false);
   const [isFormValid, setFormValid] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoadingProfile, setLoadingProfile] = useState(false);
 
   const navigate = useNavigate();
 
@@ -127,6 +128,7 @@ function App() {
 
   function handleUpdateUser(values) {
     const { name, email } = values;
+    setLoadingProfile(true);
     setUserInfo(name, email)
       .then((user) => {
         setCurrentUser({
@@ -148,6 +150,9 @@ function App() {
           return setResponseProfile("При обновлении профиля произошла ошибка.")
         }
       })
+      .finally(() => {
+        setLoadingProfile(false);
+      });
   }
 
   function handleLogout() {
@@ -265,6 +270,8 @@ function App() {
                   isFormValid={isFormValid}
                   setFormValid={setFormValid}
                   setUpdating={setUpdating}
+                  setLoadingProfile={setLoadingProfile}
+                  isLoadingProfile={isLoadingProfile}
                 />} />
                 <Route exact path="/signup" element={
                   <Register

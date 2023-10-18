@@ -12,7 +12,7 @@ function MoviesCard({ movie, handleSave, handleDelete }) {
 
 
   function handleSaveMovie() {
-      handleSave(movie);
+    handleSave(movie);
   };
 
   function handleDeleteMovie() {
@@ -30,7 +30,7 @@ function MoviesCard({ movie, handleSave, handleDelete }) {
     <section className="movies-card" aria-label="Карточка фильма.">
       <a className="movies-card__link" href={movie.trailerLink} target="_blank"
         rel="noopener noreferrer">
-        <img className="movies-card__image" src={movie.image.url ? `${BASE_URL}${movie.image.url}` : movie.image} alt={`Постер фильма ${movie.nameRu}`} />
+        <img className="movies-card__image" src={movie.image.url ? `${BASE_URL}${movie.image.url}` : movie.image} alt={`Постер фильма ${movie.nameRu}` } />
       </a>
       <h2 className="movies-card__title">{movie.nameRU}</h2>
       <>

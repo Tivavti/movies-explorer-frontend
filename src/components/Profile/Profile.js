@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -6,9 +6,8 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useFormWithValidation } from "../../hook/useFormWithValidation";
 import { RegexEmail, RegexName } from "../../utils/constants";
 
-function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, handleUpdateUser, handleLogout, isUpdating, isFormValid, setFormValid, setUpdating }) {
+function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, handleUpdateUser, handleLogout, isUpdating, isFormValid, setFormValid, setUpdating, setLoadingProfile, isLoadingProfile }) {
   const { values, setValues, handleChange, errors, setErrors, isValid } = useFormWithValidation();
-  const [isLoading, setLoading] = useState(false);
 
   const currentUser = useContext(CurrentUserContext);
   const initialUser = values.name !== currentUser.name || values.email !== currentUser.email;
@@ -27,7 +26,7 @@ function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, 
       name: currentUser.name,
       email: currentUser.email,
     })
-  }, [currentUser, setValues]);
+  }, [currentUser, setResponseProfile, setValues]);
 
   function changeName(evt) {
     handleChange(evt);
@@ -54,9 +53,7 @@ function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, 
 
   function onSubmit(evt) {
     evt.preventDefault();
-
-    setLoading(true);
-    handleUpdateUser(values, setLoading);
+    handleUpdateUser(values, setLoadingProfile);
   };
 
   return (
@@ -83,7 +80,7 @@ function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, 
                 placeholder="Имя"
                 value={values.name || ""}
                 onChange={changeName}
-                disabled={isLoading}
+                disabled={isLoadingProfile}
               />
             </label>
             <label className="profile__email profile__field">
@@ -96,13 +93,13 @@ function Profile({ onSideMenu, isLoggedIn, responseProfile, setResponseProfile, 
                 placeholder="email"
                 value={values.email || ""}
                 onChange={changeEmail}
-                disabled={isLoading}
+                disabled={isLoadingProfile}
               /></label>
 
             {isUpdating ?
               <div className="profile__button-container">
                 <span className="profile__error-message">{errors.name || errors.email || responseProfile}</span>
-                <button type="submit" className={!isValid || !initialUser || !isFormValid ? "profile__button-save_disabled" : "profile__button-save"} disabled={!isLoading && isFormValid ? false : true} onClick={onSubmit}>{isLoading ? "Сохраняем..." : "Сохранить"}{isLoading? true : false}</button>
+                <button type="submit" className={!isValid || !initialUser || !isFormValid || isLoadingProfile ? "profile__button-save_disabled" : "profile__button-save"} disabled={!initialUser || isLoadingProfile || !isFormValid} onClick={onSubmit}>{isLoadingProfile ? "Сохраняем..." : "Сохранить"}</button>
               </div>
               :
               <>
