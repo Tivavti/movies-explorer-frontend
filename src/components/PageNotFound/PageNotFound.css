@@ -30,6 +30,8 @@
   text-decoration: none;
   opacity: 1;
   transition: opacity 1s ease-in-out;
+  border: none;
+  background: transparent;
 }
 
 .not-found__link-to-main:hover {

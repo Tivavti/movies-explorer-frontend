@@ -7,7 +7,7 @@ function Navigation({ isLoggedIn, onSideMenu }) {
 
   return (
     <>
-      {isLoggedIn ? (
+      {!isLoggedIn && location.pathname === "/" ? (
         <nav className="nav">
           <ul className="nav__container">
             <li>

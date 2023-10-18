@@ -7,8 +7,9 @@ function Header({ onSideMenu, isLoggedIn }) {
   const location = useLocation();
 
   return (
-    <header className={`header ${location.pathname === '/' ? 'header_active' : ''} ${location.pathname === '/profile' ? 'profile__header' : ''}`}>
-      {isLoggedIn ? (
+    <header className={`header ${location.pathname === "/" ? "header_active" : ""} ${location.pathname === "/profile" ? "profile__header" : ""}`}>
+      {!isLoggedIn && location.pathname === '/'  
+      ? (
         <div className="header__container">
           <Logo />
           <Navigation

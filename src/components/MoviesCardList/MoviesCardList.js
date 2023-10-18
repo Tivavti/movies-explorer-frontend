@@ -1,12 +1,24 @@
 import React from "react";
 
-function MoviesCardList({ children }) {
+import MoviesCard from "../MoviesCard/MoviesCard";
+
+function MoviesCardList({ movies, handleSave, handleDelete, error }) {
   return (
     <section className="movies-card-list" aria-label="Список фильмов.">
-      <ul className="movies-card-list__list">
-        {children}
-      </ul>
-    </section>
+      {
+        error !== "" ?
+          <span className="movies-card-list__error-message">{error}</span>
+          :
+          <ul className="movies-card-list__list">
+            {movies.map((movie) => (
+              <MoviesCard key={movie.id || movie._id}
+                movie={movie}
+                handleSave={handleSave}
+                handleDelete={handleDelete}
+              />
+            ))}
+          </ul>}
+    </section >
   )
 }
 
