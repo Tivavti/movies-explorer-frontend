@@ -8,7 +8,7 @@ import { RegexEmail } from "../../utils/constants";
 
 function Login({ handleLogin, isLoggedIn }) {
   const [isFormValid, setFormValid] = useState(false);
-  const { values, handleChange, errors, setErrors, resetForm } = useFormWithValidation();
+  const { values, handleChange, errors, setErrors } = useFormWithValidation();
 
   useEffect(() => {
     if (errors.email || errors.password || !values.email || !values.password) {
@@ -22,7 +22,7 @@ function Login({ handleLogin, isLoggedIn }) {
   function handleSubmit(evt, setLoading) {
     evt.preventDefault();
 
-    handleLogin(values, resetForm, setLoading);
+    handleLogin(values, setLoading);
   }
 
   function changeEmail(evt) {

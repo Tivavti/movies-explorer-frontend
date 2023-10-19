@@ -78,7 +78,7 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
-  function handleLogin({ email, password }, resetForm, setLoading) {
+  function handleLogin({ email, password }, setLoading) {
     authorize(email, password)
       .then((res) => {
         localStorage.setItem("isUserLogin", true)
@@ -100,16 +100,15 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
-        resetForm();
       })
   }
 
-  function handleRegister({ name, email, password }, resetForm, setLoading) {
+  function handleRegister({ name, email, password }, setLoading) {
     register(name, email, password)
       .then(() => {
         setSuccess(true);
         handleInfoTooltip();
-        return handleLogin({ email, password }, resetForm, setLoading);
+        return handleLogin({ email, password }, setLoading);
       })
       .catch((err) => {
         setSuccess(false);
@@ -122,7 +121,6 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
-        resetForm();
       })
   }
 
@@ -209,7 +207,7 @@ function App() {
     const movieId = movie._id;
     deleteMovie(movieId)
       .then(() => {
-        setSavedMovies(savedMovies.filter((m) => m._id !== movie._id))
+        setSavedMovies(savedMovies.filter((m) => m._id !== movieId))
         localStorage.setItem("savedMovies", JSON.stringify(savedMovies.filter((m) => m._id !== movieId)));
       })
       .catch(console.error)

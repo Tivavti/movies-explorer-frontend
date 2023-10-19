@@ -8,7 +8,7 @@ import { RegexEmail, RegexName } from "../../utils/constants";
 
 function Register({ handleRegister, isLoggedIn }) {
   const [isFormValid, setFormValid] = useState(false);
-  const { values, errors, handleChange, setErrors, resetForm } = useFormWithValidation();
+  const { values, errors, handleChange, setErrors } = useFormWithValidation();
 
   useEffect(() => {
     if (errors.name || errors.email || !values.name || !values.email || !values.password) {
@@ -21,7 +21,7 @@ function Register({ handleRegister, isLoggedIn }) {
   function handleSubmit(evt, setLoading) {
     evt.preventDefault();
 
-    handleRegister(values, resetForm, setLoading);
+    handleRegister(values, setLoading);
   }
 
   function changeName(evt) {
